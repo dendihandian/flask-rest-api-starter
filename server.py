@@ -2,6 +2,8 @@ from flask import Flask, jsonify, request
 
 app = Flask(__name__)
 
+global idSequence
+idSequence = 3
 examples = [
 	{
 		'id': 1,
@@ -28,7 +30,7 @@ def exampleList():
 	return jsonify({
 		'message': 'Example List',
 		'data': examples
-	})
+	}), 200
 
 def validateExample(exampleObject):
 	if 	( 'stringExample' in exampleObject and
@@ -42,12 +44,26 @@ def validateExample(exampleObject):
 
 @app.route('/api/examples', methods=['POST'])
 def exampleCreate():
+	global idSequence
 	requestData = request.get_json()
 	if (validateExample(requestData)):
-		examples.insert(0, requestData)
-		return 'True'
+		newExample = {
+			'id': idSequence,
+			'stringExample': requestData['stringExample'],
+			'numberExample': requestData['numberExample'],
+			'floatExample': requestData['floatExample'],
+			'booleanExample': requestData['booleanExample']
+		}
+		examples.insert(0, newExample)
+		idSequence = idSequence + 1
+		return jsonify({
+			'message': 'Example Created',
+			'data' : newExample
+		}), 200
 	else:
-		return 'False'
+		return jsonify({
+			'message': 'Bad Request'
+		}), 400
 
 @app.route('/api/examples/<int:exampleId>')
 def exampleDetail(exampleId):
@@ -60,6 +76,6 @@ def exampleDetail(exampleId):
 	return jsonify({
 		'message': 'Example Detail',
 		'data': foundExample
-	})
+	}), 200
 
 app.run(port=5000)
