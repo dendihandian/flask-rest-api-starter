@@ -1,4 +1,4 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 
 app = Flask(__name__)
 
@@ -23,18 +23,28 @@ examples = [
 def hello_world():
 	return 'Hello World!'
 
-@app.route('/examples')
+@app.route('/api/examples')
 def exampleList():
-	return jsonify({'data': examples})
+	return jsonify({
+		'message': 'Example List',
+		'data': examples
+	})
 
-@app.route('/examples/<int:exampleId>')
+@app.route('/api/examples', methods=['POST'])
+def exampleCreate():
+	return jsonify(request.get_json())
+
+@app.route('/api/examples/<int:exampleId>')
 def exampleDetail(exampleId):
-	return_value = {}
+	foundExample = {}
 	for example in examples:
 		if example['id'] == exampleId:
-			return_value = example
+			foundExample = example
 			break
 
-	return jsonify(return_value)
+	return jsonify({
+		'message': 'Example Detail',
+		'data': foundExample
+	})
 
 app.run(port=5000)
