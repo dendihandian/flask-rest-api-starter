@@ -85,6 +85,31 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Example",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "{{flask_server}}/api/examples/3",
+							"host": [
+								"{{flask_server}}"
+							],
+							"path": [
+								"api",
+								"examples",
+								"3"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		}
