@@ -30,9 +30,24 @@ def exampleList():
 		'data': examples
 	})
 
+def validateExample(exampleObject):
+	if 	( 'stringExample' in exampleObject and
+		  'numberExample' in exampleObject and
+		  'floatExample' in exampleObject and
+		  'booleanExample' in exampleObject
+		):
+		return True
+	else:
+		return False
+
 @app.route('/api/examples', methods=['POST'])
 def exampleCreate():
-	return jsonify(request.get_json())
+	requestData = request.get_json()
+	if (validateExample(requestData)):
+		examples.insert(0, requestData)
+		return 'True'
+	else:
+		return 'False'
 
 @app.route('/api/examples/<int:exampleId>')
 def exampleDetail(exampleId):
