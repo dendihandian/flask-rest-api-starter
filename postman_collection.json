@@ -1,0 +1,92 @@
+{
+	"info": {
+		"_postman_id": "913e4ac5-a61a-4b04-aeda-072a202881f7",
+		"name": "Flask REST API Starter",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Examples",
+			"item": [
+				{
+					"name": "Examples",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "{{flask_server}}/api/examples",
+							"host": [
+								"{{flask_server}}"
+							],
+							"path": [
+								"api",
+								"examples"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Examples",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"stringExample\": \"a string\",\n\t\"numberExample\": 123456789,\n\t\"floatExample\": 3.14,\n\t\"booleanExample\": true\n}"
+						},
+						"url": {
+							"raw": "{{flask_server}}/api/examples",
+							"host": [
+								"{{flask_server}}"
+							],
+							"path": [
+								"api",
+								"examples"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Examples Alternative",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"stringExample\": \"a string\",\n\t\"numberExample\": 123456789,\n\t\"floatExample\": 3.14\n}"
+						},
+						"url": {
+							"raw": "{{flask_server}}/api/examples",
+							"host": [
+								"{{flask_server}}"
+							],
+							"path": [
+								"api",
+								"examples"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
