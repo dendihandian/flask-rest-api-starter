@@ -1,4 +1,5 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, Response
+import json
 
 app = Flask(__name__)
 
@@ -56,14 +57,15 @@ def exampleCreate():
 		}
 		examples.insert(0, newExample)
 		idSequence = idSequence + 1
-		return jsonify({
+		return Response(json.dumps({
 			'message': 'Example Created',
 			'data' : newExample
-		}), 200
+		}), 201, mimetype='application/json')
+
 	else:
-		return jsonify({
+		return Response(json.dumps({
 			'message': 'Bad Request'
-		}), 400
+		}), 400, mimetype='application/json')
 
 @app.route('/api/examples/<int:exampleId>')
 def exampleDetail(exampleId):
